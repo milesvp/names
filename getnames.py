@@ -4,7 +4,7 @@ import pickle
 
 def getHTML(year = 1880):
     url = "http://www.ssa.gov/cgi-bin/popularnames.cgi"
-    values = {'top': 1000, 'number': 'n', 'yob': str(year)}
+    values = {'top': 1000, 'number': 'n', 'year': str(year)}
     data = urllib.urlencode(values)
     req = urllib2.Request(url,data)
     response = urllib2.urlopen(req)
