@@ -41,3 +41,18 @@ def makeGirlList():
             except:
                 names[name] = [(year,count)]
     return names
+
+def getMinYear(name):
+    return min([year for year, count in name])
+
+def getMaxYear(name):
+    return max([year for year, count in name])
+
+def getYearRange(names, girlname_dict):
+    min_years = []
+    max_years = []
+    for name in names:
+        min_years.append(getMinYear(girlname_dict[name]))
+        max_years.append(getMaxYear(girlname_dict[name]))
+    return min(min_years), max(max_years)
+
