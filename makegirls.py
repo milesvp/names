@@ -83,7 +83,17 @@ def plot(names):
         pylab.plot(years, getAnnualCounts(name, min_year, max_year))
     pylab.show()
 
+def main():
+    names = []
+    for name, years in makeGirlList().iteritems():
+        if len(years) >4:
+            names.append(name)
+    names.sort()
+    for name in names:
+        print name
 
+if __name__ == "__main__":
+    main()
 
 
 
