@@ -1,19 +1,21 @@
 import urllib, urllib2
-from BeautifulSoup import BeautifulSoup as BS
+from bs4 import BeautifulSoup as BS
 import pickle
 
 def getHTML(year = 1880):
-    url = "http://www.ssa.gov/cgi-bin/popularnames.cgi"
-    values = {'top': 1000, 'number': 'n', 'year': str(year)}
+    url = "https://www.ssa.gov/cgi-bin/popularnames.cgi"
+    values = {'top': 1000, 'number': 'p', 'year': str(year)}
+    headers = {'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:50.0) Gecko/20100101 Firefox/50.0',
+               'Referrer': 'https://www.ssa.gov/OACT/babynames/index.html'}
     data = urllib.urlencode(values)
-    req = urllib2.Request(url,data)
+    req = urllib2.Request(url,data, headers)
     response = urllib2.urlopen(req)
     html = response.read()
     return html
 
 def getNames(year = 1880):
     html = getHTML(year)
-    soup = BS(''.join(html))
+    soup = BS(''.join(html), 'html5lib')
     soup.prettify()
     tables = soup.findAll('table')
 
